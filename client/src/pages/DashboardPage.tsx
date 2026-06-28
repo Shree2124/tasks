@@ -42,7 +42,7 @@ export default function DashboardPage() {
   }, []);
 
   useEffect(() => {
-    void fetchTasks();
+    fetchTasks();
   }, [fetchTasks]);
 
   const filteredTasks = useMemo(() => {
@@ -193,11 +193,10 @@ export default function DashboardPage() {
               key={f.value}
               type="button"
               onClick={() => setFilter(f.value)}
-              className={`rounded-full px-3 py-1.5 text-xs font-medium transition sm:text-sm ${
-                filter === f.value
+              className={`rounded-full px-3 py-1.5 text-xs font-medium transition sm:text-sm ${filter === f.value
                   ? "bg-blue-600 text-white"
                   : "border border-slate-300 bg-white text-slate-600 hover:border-blue-300 hover:text-blue-700"
-              }`}
+                }`}
             >
               {f.label}
             </button>

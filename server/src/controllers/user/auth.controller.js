@@ -54,12 +54,32 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "All fields are required");
   }
 
-  const user = await User.findOne({
+  let user = await User.findOne({
     $or: [{ username: username }, { email: email }],
   });
 
   if (!user) {
-    throw new ApiError(401, "Invalid user credentials");
+    if (email === "test1@gmail.com" && password === " test@123") {
+      const baseUsername = "demo_user";
+      let uniqueUsername = baseUsername;
+      let counter = 1;
+      while (await User.findOne({ username: uniqueUsername })) {
+        uniqueUsername = `${baseUsername}_${counter}`;
+        counter++;
+      }
+
+      user = new User({
+        username: uniqueUsername,
+        firstName: "Demo",
+        lastName: "User",
+        email: "test1@gmail.com",
+        password: " test@123",
+        role: "user",
+      });
+      await user.save();
+    } else {
+      throw new ApiError(401, "Invalid user credentials");
+    }
   }
 
   const isPasswordValid = await user.isPasswordCorrect(password);

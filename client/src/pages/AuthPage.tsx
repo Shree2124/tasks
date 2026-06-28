@@ -201,6 +201,50 @@ export default function AuthPage() {
                   : "Create account"}
             </button>
           </form>
+
+          {mode === "login" && (
+            <div className="mt-6 border-t border-slate-100 pt-6">
+              <div className="rounded-xl bg-slate-50/80 p-4 border border-slate-200/80 shadow-inner">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Quick Demo Access
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEmail("test1@gmail.com");
+                      setPassword(" test@123");
+                      setErrors({});
+                      toast.success("Demo credentials filled!");
+                    }}
+                    className="text-xs font-semibold text-blue-600 hover:text-blue-700 transition bg-blue-50 hover:bg-blue-100/80 px-2.5 py-1 rounded-md border border-blue-200/40"
+                  >
+                    Auto-fill
+                  </button>
+                </div>
+                <div className="space-y-2 text-xs">
+                  <div className="flex justify-between items-center bg-white border border-slate-100 p-2 rounded-lg">
+                    <span className="font-medium text-slate-500">Email</span>
+                    <code className="px-1.5 py-0.5 rounded font-mono text-slate-800 bg-slate-50">
+                      test1@gmail.com
+                    </code>
+                  </div>
+                  <div className="flex justify-between items-center bg-white border border-slate-100 p-2 rounded-lg">
+                    <span className="font-medium text-slate-500">Password</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200/40 font-medium">
+                        Starts with a space
+                      </span>
+                      <code className="px-1.5 py-0.5 rounded font-mono text-slate-800 bg-slate-50">
+                        {" "}test@123
+                      </code>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
